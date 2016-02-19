@@ -1,6 +1,6 @@
 /*
   Force Feedback Joystick
-  USB HID descriptors for a force feedback joystick.  
+  USB HID descriptors for a force feedback joystick.
 
   This code is for Microsoft Sidewinder Force Feedback Pro joystick
   with some room for additional extra controls.
@@ -116,7 +116,7 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM JoystickReport[] =
     HID_RI_REPORT_COUNT(8, 0x01),
 	HID_RI_INPUT(8, HID_IOF_DATA | HID_IOF_VARIABLE | HID_IOF_ABSOLUTE),		 // Throttle
 
-    HID_RI_USAGE_PAGE(8, 0x09),
+    HID_RI_USAGE_PAGE(8, 0x09),     //Buttons 1-8
     HID_RI_USAGE_MINIMUM(8, 0x01),
     HID_RI_USAGE_MAXIMUM(8, 0x08),
     HID_RI_LOGICAL_MINIMUM(8, 0x00),
@@ -126,8 +126,20 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM JoystickReport[] =
     HID_RI_REPORT_COUNT(8, 0x08),
     HID_RI_INPUT(8, HID_IOF_DATA | HID_IOF_VARIABLE | HID_IOF_ABSOLUTE),
 
-    HID_RI_USAGE_MINIMUM(8, 0x09),
+    HID_RI_USAGE_MINIMUM(8, 0x09), //Buttons 9-16
     HID_RI_USAGE_MAXIMUM(8, 0x10),
+    HID_RI_REPORT_SIZE(8, 0x01),
+    HID_RI_REPORT_COUNT(8, 0x08),
+    HID_RI_INPUT(8, HID_IOF_DATA | HID_IOF_VARIABLE | HID_IOF_ABSOLUTE),
+
+    HID_RI_USAGE_MINIMUM(8, 0x11), //Buttons 17-24
+    HID_RI_USAGE_MAXIMUM(8, 0x18),
+    HID_RI_REPORT_SIZE(8, 0x01),
+    HID_RI_REPORT_COUNT(8, 0x08),
+    HID_RI_INPUT(8, HID_IOF_DATA | HID_IOF_VARIABLE | HID_IOF_ABSOLUTE),
+
+    HID_RI_USAGE_MINIMUM(8, 0x19), //Buttons 25-32
+    HID_RI_USAGE_MAXIMUM(8, 0x20),
     HID_RI_REPORT_SIZE(8, 0x01),
     HID_RI_REPORT_COUNT(8, 0x08),
     HID_RI_INPUT(8, HID_IOF_DATA | HID_IOF_VARIABLE | HID_IOF_ABSOLUTE),
@@ -145,7 +157,7 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM JoystickReport[] =
 	0x75, 0x04,		//     REPORT_SIZE (4)
 	0x95, 0x01,		//     REPORT_COUNT (1)
 	0x81, 0x01,		//     INPUT (Cnst,Ary,Abs)		 4b Fill
-	
+
 	0x55, 0x00, 	// ( UNIT_EXPONENT ( 0))
 	0x65, 0x00, 	// ( UNIT ( None))
 /*
@@ -218,7 +230,7 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM JoystickReport[] =
 	0x75,0x08,	// REPORT_SIZE (08)
 	0x81,0x01,	// INPUT (Constant,Ary,Abs)
 */
-	
+
 	0x05,0x0F,	// USAGE_PAGE (Physical Interface)
 	0x09,0x92,	// USAGE (PID State Report)
 	0xA1,0x02,	// COLLECTION (Logical)
@@ -254,7 +266,7 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM JoystickReport[] =
 		0x95,0x01,	// REPORT_COUNT (01)
 		0x81,0x02,	// INPUT (Data,Var,Abs)
 	0xC0,	// END COLLECTION ()
-	
+
 	0x09,0x21,	// USAGE (Set Effect Report)
 	0xA1,0x02,	// COLLECTION (Logical)
 		0x85,0x01,	// REPORT_ID (01)
@@ -366,7 +378,7 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM JoystickReport[] =
 		0x66,0x00,0x00,	// UNIT (None)
 		0x55,0x00,	// UNIT_EXPONENT (00)
 	0xC0,	// END COLLECTION ()
-	
+
 	0x05,0x0F,	// USAGE_PAGE (Physical Interface)
 	0x09,0x5A,	// USAGE (Set Envelope Report)
 	0xA1,0x02,	// COLLECTION (Logical)
@@ -399,7 +411,7 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM JoystickReport[] =
 		0x66,0x00,0x00,	// UNIT (None)
 		0x55,0x00,	// UNIT_EXPONENT (00)
 	0xC0,	// END COLLECTION ()
-	
+
 	0x09,0x5F,	// USAGE (Set Condition Report)
 	0xA1,0x02,	// COLLECTION (Logical)
 		0x85,0x03,	// REPORT_ID (03)
@@ -455,7 +467,7 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM JoystickReport[] =
 		0x95,0x01,	// REPORT_COUNT (01)
 //		0x91,0x02,	// OUTPUT (Data,Var,Abs)
 	0xC0,	// END COLLECTION ()
-	
+
 	0x09,0x6E,	// USAGE (Set Periodic Report)
 	0xA1,0x02,	// COLLECTION (Logical)
 		0x85,0x04,	// REPORT_ID (04)
@@ -501,7 +513,7 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM JoystickReport[] =
 		0x66,0x00,0x00,	// UNIT (None)
 		0x55,0x00,	// UNIT_EXPONENT (00)
 	0xC0,	// END COLLECTION ()
-	
+
 	0x09,0x73,	// USAGE (Set Constant Force Report)
 	0xA1,0x02,	// COLLECTION (Logical)
 		0x85,0x05,	// REPORT_ID (05)
@@ -522,7 +534,7 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM JoystickReport[] =
 		0x95,0x01,	// REPORT_COUNT (01)
 		0x91,0x02,	// OUTPUT (Data,Var,Abs)
 	0xC0,	// END COLLECTION ()
-	
+
 	0x09,0x74,	// USAGE (Set Ramp Force Report)
 	0xA1,0x02,	// COLLECTION (Logical)
 		0x85,0x06,	// REPORT_ID (06)
@@ -544,7 +556,7 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM JoystickReport[] =
 		0x95,0x02,	// REPORT_COUNT (02)
 		0x91,0x02,	// OUTPUT (Data,Var,Abs)
 	0xC0,	// END COLLECTION ()
-	
+
 	0x09,0x68,	// USAGE (Custom Force Data Report)
 	0xA1,0x02,	// COLLECTION (Logical)
 		0x85,0x07,	// REPORT_ID (07)
@@ -573,7 +585,7 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM JoystickReport[] =
 		0x95,0x0C,	// REPORT_COUNT (0C)
 		0x92,0x02,0x01,	// OUTPUT ( Data,Var,Abs,Buf)
 	0xC0,	// END COLLECTION ()
-	
+
 	0x09,0x66,	// USAGE (Download Force Sample)
 	0xA1,0x02,	// COLLECTION (Logical)
 		0x85,0x08,	// REPORT_ID (08)
@@ -588,7 +600,7 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM JoystickReport[] =
 		0x95,0x02,	// REPORT_COUNT (02)
 		0x91,0x02,	// OUTPUT (Data,Var,Abs)
 	0xC0,	// END COLLECTION ()
-	
+
 	0x05,0x0F,	// USAGE_PAGE (Physical Interface)
 	0x09,0x77,	// USAGE (Effect Operation Report)
 	0xA1,0x02,	// COLLECTION (Logical)
@@ -619,7 +631,7 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM JoystickReport[] =
 		0x46,0xFF,0x00,	// PHYSICAL_MAXIMUM (00 FF)
 		0x91,0x02,	// OUTPUT (Data,Var,Abs)
 	0xC0,	// END COLLECTION ()
-	
+
 	0x09,0x90,	// USAGE (PID Block Free Report)
 	0xA1,0x02,	// COLLECTION (Logical)
 		0x85,0x0B,	// REPORT_ID (0B)
@@ -632,7 +644,7 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM JoystickReport[] =
 		0x95,0x01,	// REPORT_COUNT (01)
 		0x91,0x02,	// OUTPUT (Data,Var,Abs)
 	0xC0,	// END COLLECTION ()
-	
+
 	0x09,0x96,	// USAGE (PID Device Control)
 	0xA1,0x02,	// COLLECTION (Logical)
 		0x85,0x0C,	// REPORT_ID (0C)
@@ -648,7 +660,7 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM JoystickReport[] =
 		0x95,0x01,	// REPORT_COUNT (01)
 		0x91,0x00,	// OUTPUT (Data)
 	0xC0,	// END COLLECTION ()
-	
+
 	0x09,0x7D,	// USAGE (Device Gain Report)
 	0xA1,0x02,	// COLLECTION (Logical)
 		0x85,0x0D,	// REPORT_ID (0D)
@@ -661,7 +673,7 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM JoystickReport[] =
 		0x95,0x01,	// REPORT_COUNT (01)
 		0x91,0x02,	// OUTPUT (Data,Var,Abs)
 	0xC0,	// END COLLECTION ()
-	
+
 	0x09,0x6B,	// USAGE (Set Custom Force Report)
 	0xA1,0x02,	// COLLECTION (Logical)
 		0x85,0x0E,	// REPORT_ID (0E)
@@ -694,7 +706,7 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM JoystickReport[] =
 		0x55,0x00,	// UNIT_EXPONENT (00)
 		0x66,0x00,0x00,	// UNIT (None)
 	0xC0,	// END COLLECTION ()
-	
+
 	0x09,0xAB,	// USAGE (Create New Effect Report)
 	0xA1,0x02,	// COLLECTION (Logical)
 		0x85,0x05,	// REPORT_ID (05)
@@ -732,7 +744,7 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM JoystickReport[] =
 		0x75,0x06,	// REPORT_SIZE (06)
 		0xB1,0x01,	// FEATURE (Constant,Ary,Abs)
 	0xC0,	// END COLLECTION ()
-	
+
 	0x05,0x0F,	// USAGE_PAGE (Physical Interface)
 	0x09,0x89,	// USAGE (PID Block Load Report)
 	0xA1,0x02,	// COLLECTION (Logical)
@@ -767,7 +779,7 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM JoystickReport[] =
 		0x95,0x01,	// REPORT_COUNT (01)
 		0xB1,0x00,	// FEATURE (Data)
 	0xC0,	// END COLLECTION ()
-	
+
 	0x09,0x7F,	// USAGE (PID Pool Report)
 	0xA1,0x02,	// COLLECTION (Logical)
 		0x85,0x07,	// REPORT_ID (07)
@@ -897,10 +909,10 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM WheelReport[] =
 	0x75, 0x04,		//     REPORT_SIZE (4)
 	0x95, 0x01,		//     REPORT_COUNT (1)
 	0x81, 0x01,		//     INPUT (Cnst,Ary,Abs)		 4b Fill
-	
+
 	0x55, 0x00, 	// ( UNIT_EXPONENT ( 0))
 	0x65, 0x00, 	// ( UNIT ( None))
-	
+
 	0x05,0x0F,	// USAGE_PAGE (Physical Interface)
 	0x09,0x92,	// USAGE (PID State Report)
 	0xA1,0x02,	// COLLECTION (Logical)
@@ -936,7 +948,7 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM WheelReport[] =
 		0x95,0x01,	// REPORT_COUNT (01)
 		0x81,0x02,	// INPUT (Data,Var,Abs)
 	0xC0,	// END COLLECTION ()
-	
+
 	0x09,0x21,	// USAGE (Set Effect Report)
 	0xA1,0x02,	// COLLECTION (Logical)
 		0x85,0x01,	// REPORT_ID (01)
@@ -1048,7 +1060,7 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM WheelReport[] =
 		0x66,0x00,0x00,	// UNIT (None)
 		0x55,0x00,	// UNIT_EXPONENT (00)
 	0xC0,	// END COLLECTION ()
-	
+
 	0x05,0x0F,	// USAGE_PAGE (Physical Interface)
 	0x09,0x5A,	// USAGE (Set Envelope Report)
 	0xA1,0x02,	// COLLECTION (Logical)
@@ -1081,7 +1093,7 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM WheelReport[] =
 		0x66,0x00,0x00,	// UNIT (None)
 		0x55,0x00,	// UNIT_EXPONENT (00)
 	0xC0,	// END COLLECTION ()
-	
+
 	0x09,0x5F,	// USAGE (Set Condition Report)
 	0xA1,0x02,	// COLLECTION (Logical)
 		0x85,0x03,	// REPORT_ID (03)
@@ -1137,7 +1149,7 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM WheelReport[] =
 		0x95,0x01,	// REPORT_COUNT (01)
 //		0x91,0x02,	// OUTPUT (Data,Var,Abs)
 	0xC0,	// END COLLECTION ()
-	
+
 	0x09,0x6E,	// USAGE (Set Periodic Report)
 	0xA1,0x02,	// COLLECTION (Logical)
 		0x85,0x04,	// REPORT_ID (04)
@@ -1183,7 +1195,7 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM WheelReport[] =
 		0x66,0x00,0x00,	// UNIT (None)
 		0x55,0x00,	// UNIT_EXPONENT (00)
 	0xC0,	// END COLLECTION ()
-	
+
 	0x09,0x73,	// USAGE (Set Constant Force Report)
 	0xA1,0x02,	// COLLECTION (Logical)
 		0x85,0x05,	// REPORT_ID (05)
@@ -1204,7 +1216,7 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM WheelReport[] =
 		0x95,0x01,	// REPORT_COUNT (01)
 		0x91,0x02,	// OUTPUT (Data,Var,Abs)
 	0xC0,	// END COLLECTION ()
-	
+
 	0x09,0x74,	// USAGE (Set Ramp Force Report)
 	0xA1,0x02,	// COLLECTION (Logical)
 		0x85,0x06,	// REPORT_ID (06)
@@ -1226,7 +1238,7 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM WheelReport[] =
 		0x95,0x02,	// REPORT_COUNT (02)
 		0x91,0x02,	// OUTPUT (Data,Var,Abs)
 	0xC0,	// END COLLECTION ()
-	
+
 	0x09,0x68,	// USAGE (Custom Force Data Report)
 	0xA1,0x02,	// COLLECTION (Logical)
 		0x85,0x07,	// REPORT_ID (07)
@@ -1255,7 +1267,7 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM WheelReport[] =
 		0x95,0x0C,	// REPORT_COUNT (0C)
 		0x92,0x02,0x01,	// OUTPUT ( Data,Var,Abs,Buf)
 	0xC0,	// END COLLECTION ()
-	
+
 	0x09,0x66,	// USAGE (Download Force Sample)
 	0xA1,0x02,	// COLLECTION (Logical)
 		0x85,0x08,	// REPORT_ID (08)
@@ -1270,7 +1282,7 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM WheelReport[] =
 		0x95,0x02,	// REPORT_COUNT (02)
 		0x91,0x02,	// OUTPUT (Data,Var,Abs)
 	0xC0,	// END COLLECTION ()
-	
+
 	0x05,0x0F,	// USAGE_PAGE (Physical Interface)
 	0x09,0x77,	// USAGE (Effect Operation Report)
 	0xA1,0x02,	// COLLECTION (Logical)
@@ -1301,7 +1313,7 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM WheelReport[] =
 		0x46,0xFF,0x00,	// PHYSICAL_MAXIMUM (00 FF)
 		0x91,0x02,	// OUTPUT (Data,Var,Abs)
 	0xC0,	// END COLLECTION ()
-	
+
 	0x09,0x90,	// USAGE (PID Block Free Report)
 	0xA1,0x02,	// COLLECTION (Logical)
 		0x85,0x0B,	// REPORT_ID (0B)
@@ -1314,7 +1326,7 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM WheelReport[] =
 		0x95,0x01,	// REPORT_COUNT (01)
 		0x91,0x02,	// OUTPUT (Data,Var,Abs)
 	0xC0,	// END COLLECTION ()
-	
+
 	0x09,0x96,	// USAGE (PID Device Control)
 	0xA1,0x02,	// COLLECTION (Logical)
 		0x85,0x0C,	// REPORT_ID (0C)
@@ -1330,7 +1342,7 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM WheelReport[] =
 		0x95,0x01,	// REPORT_COUNT (01)
 		0x91,0x00,	// OUTPUT (Data)
 	0xC0,	// END COLLECTION ()
-	
+
 	0x09,0x7D,	// USAGE (Device Gain Report)
 	0xA1,0x02,	// COLLECTION (Logical)
 		0x85,0x0D,	// REPORT_ID (0D)
@@ -1343,7 +1355,7 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM WheelReport[] =
 		0x95,0x01,	// REPORT_COUNT (01)
 		0x91,0x02,	// OUTPUT (Data,Var,Abs)
 	0xC0,	// END COLLECTION ()
-	
+
 	0x09,0x6B,	// USAGE (Set Custom Force Report)
 	0xA1,0x02,	// COLLECTION (Logical)
 		0x85,0x0E,	// REPORT_ID (0E)
@@ -1376,7 +1388,7 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM WheelReport[] =
 		0x55,0x00,	// UNIT_EXPONENT (00)
 		0x66,0x00,0x00,	// UNIT (None)
 	0xC0,	// END COLLECTION ()
-	
+
 	0x09,0xAB,	// USAGE (Create New Effect Report)
 	0xA1,0x02,	// COLLECTION (Logical)
 		0x85,0x05,	// REPORT_ID (05)
@@ -1414,7 +1426,7 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM WheelReport[] =
 		0x75,0x06,	// REPORT_SIZE (06)
 		0xB1,0x01,	// FEATURE (Constant,Ary,Abs)
 	0xC0,	// END COLLECTION ()
-	
+
 	0x05,0x0F,	// USAGE_PAGE (Physical Interface)
 	0x09,0x89,	// USAGE (PID Block Load Report)
 	0xA1,0x02,	// COLLECTION (Logical)
@@ -1449,7 +1461,7 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM WheelReport[] =
 		0x95,0x01,	// REPORT_COUNT (01)
 		0xB1,0x00,	// FEATURE (Data)
 	0xC0,	// END COLLECTION ()
-	
+
 	0x09,0x7F,	// USAGE (PID Pool Report)
 	0xA1,0x02,	// COLLECTION (Logical)
 		0x85,0x07,	// REPORT_ID (07)

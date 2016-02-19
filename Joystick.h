@@ -46,6 +46,7 @@ typedef struct
 	uint8_t  Rudder;
 	uint8_t  Throttle;
 	uint16_t Button;
+	uint16_t ButtonExtra;
 	uint8_t Hat;
 	} USB_JoystickReport_Data_t;
 
@@ -72,5 +73,6 @@ int Joystick_Connect(void);
 // generated.
 int Joystick_CreateInputReport(uint8_t inReportId, USB_JoystickReport_Data_t* const outReportData);
 
+uint16_t readExtraButtons(void);
 #endif
 

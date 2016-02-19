@@ -117,6 +117,17 @@ void Joystick_Init(void)
 	ADCSRA |= (1 << ADIE);  	// Enable ADC Interrupt
 
 	ADCSRA |= (1 << ADSC); 		// Go ADC
+
+    // enable inputs for extra buttons
+	DDRB  &= ~((1<<PB6) | (1<<PB7)); // set as inputs PB6, PB7
+	PORTB |= (1<<PB6) | (1<<PB7); // enable pullups
+
+	DDRC  &= ~((1<<PC6) | (1<<PC7)); // set as inputs PC6, PC7
+	PORTC |= (1<<PC6) | (1<<PC7); // enable pullups
+
+	DDRD  &= ~((1<<PD1) | (1<<PD2) | (1<<PD4) | (1<<PD5) | (1<<PD7)); // set as inputs PD1, PD2, PD4, PD5, PD7
+	PORTD |= (1<<PD1) | (1<<PD2) | (1<<PD4) | (1<<PD5) | (1<<PD7); // enable pullups
+
 	}
 
 /** Configures the board hardware and chip peripherals for the joystick's functionality. */
@@ -271,6 +282,9 @@ int Joystick_CreateInputReport(uint8_t inReportId, USB_JoystickReport_Data_t* co
 		if (sw_report[2] & 0x08)
 			outReportData->Y |= (0b11111100 << 8);
 
+        // read the pins for any extra buttons
+        outReportData->ButtonExtra = readExtraButtons();
+
 		// this part makes Shift act like a shift.
 		// Btn1-8 will be Btn9-16 when shifted
 		if ((sw_report[4] & 0b01000000) == 0b01000000)
@@ -278,6 +292,7 @@ int Joystick_CreateInputReport(uint8_t inReportId, USB_JoystickReport_Data_t* co
             // button 9 (shift) is held down
             sw_report[4] &= 0b10111111;     // Lift up button 9; it's not to be used alone.
             outReportData->Button = ((sw_report[4] & 0x7F) << 10) + ((sw_report[3] & 0xC0) << 2);
+            outReportData->ButtonExtra = outReportData->ButtonExtra << 8; // shift the extra buttons too
         }
         else
         {
@@ -297,6 +312,7 @@ int Joystick_CreateInputReport(uint8_t inReportId, USB_JoystickReport_Data_t* co
 		outReportData->Rudder = (added_controls_adc.pedal2 - added_controls_adc.pedal1) / 2 - 128;	// Combine two pedals into a single rudder
 		outReportData->Rx = added_controls_adc.trim2;	// rudder trim
 		outReportData->Ry = added_controls_adc.trim1;	// elevator trim
+
 		}
 
 /*
@@ -344,6 +360,22 @@ int Joystick_CreateInputReport(uint8_t inReportId, USB_JoystickReport_Data_t* co
 */
 	return InputChanged;
 	}
+
+uint16_t readExtraButtons(void)
+{
+    uint16_t buttons = 0x00FF;
+
+    // extra buttons 17-24
+    // PB7, PD1, PD2, PC6, PC7, PB6, PD7, PD4
+    buttons &= ~((1<<PB7&PINB) >> 7);
+    buttons &= ~((1<<PD1&PIND) | (1<<PD2&PIND));
+    buttons &= ~(((1<<PC6&PINC) | (1<<PC7&PINC)) >> 3);
+    buttons &= ~((1<<PB6&PINB) >> 1);
+    buttons &= ~((1<<PD7&PIND) >> 1);
+    buttons &= ~((1<<PD4&PIND) << 3);
+
+    return buttons;
+}
 
 
 // AD-conversion-completed-interrupt handler.
